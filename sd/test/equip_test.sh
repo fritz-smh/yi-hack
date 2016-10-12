@@ -114,8 +114,8 @@ cd /home/3518
 himm 0x20050074 0x06802424
 
 ### Let ppl hear that we start
-/home/rmm "/home/hd1/voice/welcome.g726" 1
-/home/rmm "/home/hd1/voice/wait.g726" 1
+/home/rmm "/home/hd1/voice/test/welcome.g726" 1
+/home/rmm "/home/hd1/voice/test/wait.g726" 1
 
 ### start blinking blue led for configuration in progress
 #/home/led_ctl -boff -yon &
