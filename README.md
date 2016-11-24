@@ -106,7 +106,7 @@ How can I know which is the version of a firmware 'home' file ?
 
 Just do : **strings home  | grep version**. Example :
 
-    $ strings home  | grep 1.8.5
+    $ strings home  | grep version
     version=1.8.5.1M_201512011815
 
 
