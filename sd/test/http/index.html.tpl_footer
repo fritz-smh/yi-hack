@@ -1,10 +1,13 @@
   </pre>
+  <div id="iframe"></div>
+
   <script type="text/javascript">
       var ip = location.host;
       document.getElementById("ip").textContent=ip;
       document.getElementById("ch0_0").href="rtsp://"+ip+":554/ch0_0.h264";
       document.getElementById("ch0_1").href="rtsp://"+ip+":554/ch0_1.h264";
       document.getElementById("ch0_3").href="rtsp://"+ip+":554/ch0_3.h264";
+      document.getElementById("iframe").innerHTML = "<iframe src='http://" + ip + ":8080'></iframe>";
   </script>
 </body>
 </html>
