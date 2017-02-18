@@ -9,7 +9,7 @@ GATEWAY=192.168.1.254
 NAMESERVER=192.168.1.254
 
 ### Led color after full boot
-# The sequence will be : 
+# The sequence will be :
 # - orange : startup
 # - blue blinking : configuration
 # - blue : configuration finished, camera ready
@@ -17,11 +17,11 @@ NAMESERVER=192.168.1.254
 
 # values :
 #    -boff -bfast : blue blinking
-#    -boff -bon : blue on    
-#    -boff -boff : blue off   
-#    -boff -yfast : yellow blinking  
-#    -boff -yon : yellow on    
-#    -boff -yoff : yellow off 
+#    -boff -bon : blue on
+#    -boff -boff : blue off
+#    -boff -yfast : yellow blinking
+#    -boff -yon : yellow on
+#    -boff -yoff : yellow off
 LED_WHEN_READY=-boff -bon
 
 ### Timezone

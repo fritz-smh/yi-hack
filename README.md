@@ -73,9 +73,9 @@ Configure the Yi camera on the memory card
 
 You will need to set a static IP adresse to the camera. To check for the available IPs on your network, you can use the **Fing** application to scan the network on your Android smartphone.
 
-To configure the wifi network to use, edit the file **test/wpa_supplicant.conf**.
+To configure the wifi network to use, copy `test/config/wpa_supplicant.conf.example` to `test/config/wpa_supplicant.conf` and edit it.
 
-To configure your IP address, open the file **test/yi-hack.cfg** and set the values.
+To configure your IP address, copy `test/config/yi-hack.cfg.example` to `test/config/yi-hack.cfg` and set the values.
 
 Start the camera
 ----------------
