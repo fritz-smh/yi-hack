@@ -1,0 +1,23 @@
+#!/usr/bin/expect
+set timeout 1
+set ip [lindex $argv 0]
+set port [lindex $argv 1]
+set username [lindex $argv 2]
+set password [lindex $argv 3]
+spawn telnet $ip $port
+expect "'^]'." sleep .1;
+send "\r";
+sleep .1;
+expect -nocase "login:"
+send  "$username\r"
+expect -nocase "password: "
+send "$password\r"
+# Match the prompt (contains a $)
+expect -re {\#}
+# reboot
+send "reboot\r"
+# Wait for the prompt
+expect -re {\#}
+exit 
+
+

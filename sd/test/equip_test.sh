@@ -60,9 +60,15 @@ log() {
 
 get_config() {
     key=$1
-    grep $1 /home/hd1/test/yi-hack.cfg  | cut -d"=" -f2
+    grep "^$1=" /home/hd1/test/yi-hack.cfg  | cut -d"=" -f2
 }
 
+boot_voice() {
+     voice_file=$1
+     if [ "$(get_config BOOT_VOICE)" = "yes" ]; then
+         /home/rmm "$voice_file" 1
+     fi
+}
 
 
 ### first we assume that this script is started from /home/init.sh and will replace it from the below lines (which are not commented in init.sh :
@@ -114,8 +120,8 @@ cd /home/3518
 himm 0x20050074 0x06802424
 
 ### Let ppl hear that we start
-/home/rmm "/home/hd1/voice/welcome.g726" 1
-/home/rmm "/home/hd1/voice/wait.g726" 1
+boot_voice "/home/hd1/test/voice/welcome.g726" 1
+boot_voice "/home/hd1/test/voice/wait.g726" 1
 
 ### start blinking blue led for configuration in progress
 #/home/led_ctl -boff -yon &
@@ -261,7 +267,7 @@ log "Debug mode = $(get_config DEBUG)"
 # first, configure wifi
 
 ### Let ppl hear that we start connect wifi
-/home/rmm "/home/hd1/voice/connectting.g726" 1
+boot_voice "/home/hd1/test/voice/connectting.g726" 1
 
 log "Check for wifi configuration file...*"
 log $(find /home -name "wpa_supplicant.conf")
@@ -271,20 +277,27 @@ res=$(/home/wpa_supplicant -B -i ra0 -c /home/wpa_supplicant.conf )
 log "Status for wifi configuration=$?  (0 is ok)"
 log "Wifi configuration answer: $res"
 
-log "Do network configuration 1/2 (ip and gateway)"
-#ifconfig ra0 192.168.1.121 netmask 255.255.255.0
-#route add default gw 192.168.1.254
-ifconfig ra0 $(get_config IP) netmask $(get_config NETMASK)
-route add default gw $(get_config GATEWAY)
-log "Done"
+if [[ $(get_config DHCP) == "yes" ]] ; then
+    log "Network config >> DHCP"
+    my_gateway=$(udhcpc --interface=ra0 | grep "Adding router" | awk '{print $3}' | tr -d '\n')
+    log "Default router is $my_gateway"
+else
+  log "Do network configuration 1/2 (ip and gateway)"
+  #ifconfig ra0 192.168.1.121 netmask 255.255.255.0
+  #route add default gw 192.168.1.254
+  ifconfig ra0 $(get_config IP) netmask $(get_config NETMASK)
+  route add default gw $(get_config GATEWAY)
+  my_gateway=$(get_config GATEWAY)
+  log "Done"
+  ###
+  log "Configuration is :"
+  ifconfig | sed "s/^/    /" >> ${LOG_FILE}
+  ### configure DNS (google one)
+  log "Do network configuration 2/2 (DNS)"
+  echo "nameserver $(get_config NAMESERVER)" > /etc/resolv.conf
+  log "Done"
+fi
 
-log "Configuration is :"
-ifconfig | sed "s/^/    /" >> ${LOG_FILE}
-
-### configure DNS (google one)
-log "Do network configuration 2/2 (DNS)"
-echo "nameserver $(get_config NAMESERVER)" > /etc/resolv.conf
-log "Done"
 
 ### configure time on a NTP server
 log "Get time from a NTP server..."
@@ -298,9 +311,9 @@ log "New datetime is $(date)"
 
 
 ### Check if reach gateway and notify
-ping -c1 -W2 $(get_config GATEWAY) > /dev/null
+ping -c1 -W2 $my_gateway > /dev/null
 if [ 0 -eq $? ]; then
-    /home/rmm "/home/hd1/voice/wifi_connected.g726" 1
+    boot_voice "/home/hd1/test/voice/wifi_connected.g726" 1
 fi
 
 ### set the root password
@@ -397,10 +410,10 @@ fi
 ### Final led color
 
 ### Check if reach gateway and notify
-ping -c1 -W2 $(get_config GATEWAY) > /dev/null
+ping -c1 -W2 $my_gateway > /dev/null
 if [ 0 -eq $? ]; then
     led $(get_config LED_WHEN_READY)
-    /home/rmm "/home/hd1/voice/success.g726" 1
+    boot_voice "/home/hd1/test/voice/success.g726" 1
 else
     led -boff -yfast
 fi
@@ -427,6 +440,8 @@ ps | grep rtspsvr | grep -v grep >> ${LOG_FILE}
 
 sleep 5
 
+### Start check_motion.sh script
+/home/hd1/test/check_motion.sh &
 
 ### List the processes after startup
 log "Processes after startup :"
@@ -439,7 +454,3 @@ df -h >> ${LOG_FILE}
 ### to make sure log are written...
 
 sync
-
-
-
-
