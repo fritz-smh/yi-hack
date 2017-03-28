@@ -292,7 +292,7 @@ NTP_SERVER=$(get_config NTP_SERVER)
 log "But first, test the NTP server '${NTP_SERVER}':"
 ping -c1 ${NTP_SERVER} >> ${LOG_FILE}
 log "Previous datetime is $(date)"
-ntpd -q -p ${NTP_SERVER}
+ntpd -n -q -p ${NTP_SERVER}
 log "Done"
 log "New datetime is $(date)"
 
