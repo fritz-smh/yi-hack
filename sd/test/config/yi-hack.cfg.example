@@ -1,0 +1,87 @@
+### Set the root password
+ROOT_PASSWORD=1234qwer
+
+### Network configuration
+# Don't forget to also fill the file wpa_supplicant.conf for the wifi configuration
+# Set DHCP to 'yes' to enable DHCP client (if 'yes', Yi will ignore IP/Netmask/etc settings below)
+DHCP=yes
+IP=192.168.1.121
+NETMASK=255.255.255.0
+GATEWAY=192.168.1.254
+NAMESERVER=192.168.1.254
+
+### Motion notifications
+# Optionally POST a JSON message of the status of motion detection to a URL
+# Values : URL to POST notification to, or leave empty to disable
+MOTION_NOTIFICATION_URL=
+
+### Led color after full boot
+# The sequence will be :
+# - orange : startup
+# - blue blinking : configuration
+# - blue : configuration finished, camera ready
+# - ??? : color set a few seconds after the camera is ready
+
+# values :
+#    -boff -bfast : blue blinking
+#    -boff -bon : blue on
+#    -boff -boff : blue off
+#    -boff -yfast : yellow blinking
+#    -boff -yon : yellow on
+#    -boff -yoff : yellow off
+LED_WHEN_READY=-boff -bon
+
+### Timezone
+# Example timezones, see more at http://svn.fonosfera.org/fon-ng/trunk/luci/modules/admin-fon/root/etc/timezones.db
+#   -Europe/London GMT0BST,M3.5.0/1,M10.5.0
+#   -Europe/Paris CET-1CEST,M3.5.0,M10.5.0/3
+#   -US/Central CST6CDT,M3.2.0,M11.1.0
+TIMEZONE=GMT0BST,M3.5.0/1,M10.5.0
+
+### NTP server
+#If you want to change your ntp server you can see a list here http://www.pool.ntp.org/zone/@
+NTP_SERVER=0.uk.pool.ntp.org
+
+### Boot voice
+# If you want to disable the voice feedback during boot, change BOOT_VOICE to 'no'
+# Values : yes|no
+BOOT_VOICE=yes
+
+
+### Enable Cloud Features
+# No disables cloud features (Yi Home App) and cameras are accessible over local network only.
+# Values: yes|no
+CLOUD=yes
+
+### Debug
+# Debug mode, keep it to 'no' unless you known what you do
+# Values : yes|no
+DEBUG=no
+
+### FTP server for uploading recorded files
+# - IP address of FTP server
+# - Port, keep it default if you didn't have special FTP server port
+# - FTP username
+# - FTP password
+# - Folder in home folder of user on FTP server.
+FTP_HOST=192.168.1.1
+FTP_PORT=21
+FTP_USER=ftp_username
+FTP_PASS=ftp_password
+FTP_DIR=camera1
+
+### Gateway offline duaration
+# If you schedule your router to offline (during midnight for example).
+# - GW_OFF_START: Start time of offline duration. Ex: 23:00
+# - GW_OFF_END: End time of offline duration. Ex: 02:00
+#
+# Please use 24h format. In your timezone.
+# Let them blank if not use.
+GW_OFF_START=
+GW_OFF_END=
+
+### Housekeeper option
+# - RETRY_TO_ALERT: Number of unreachable ping to Gateway before alert by yellow flash
+# - RECORD_KEEP_DAYS: Number days that recorded videos are kept. Older ones are deleted.
+RETRY_TO_ALERT=10
+RECORD_KEEP_DAYS=7

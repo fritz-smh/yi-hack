@@ -1,1 +1,7 @@
+.DS_Store
+
 sd/test/http/index.html
+
+# Config files
+sd/test/config/*
+!sd/test/config/*.example
