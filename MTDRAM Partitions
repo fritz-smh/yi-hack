@@ -1,0 +1,11 @@
+
+    Start address  End address      Partition  Device Description
+    -------------- --------------   ---------  ------ ---------------------
+    0x000000000000-0x000000040000 : "boot"     mtd0   The U-Boot loader
+    0x000000040000-0x000000050000 : "env"      mtd1   Environment variables
+    0x000000050000-0x000000060000 : "conf"     mtd2   Configuration data
+    0x000000060000-0x0000001f0000 : "os"       mtd3   Linux kernel
+    0x0000001f0000-0x000000330000 : "rootfs"   mtd4   / file system
+    0x000000330000-0x000000fe0000 : "home"     mtd5   /home file system
+    0x000000fe0000-0x000000ff0000 : "vd1"      mtd6   ???
+    0x000000ff0000-0x000001000000 : "ver"      mtd7   ???
