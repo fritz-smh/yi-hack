@@ -2,7 +2,7 @@
 Yi-hack project
 ===============
 
-Personnal note - 4 october 2016
+Personal note - 4 October 2016
 ===============================
 
 Hi, I am Fritz, the one who created this project. Since summer 2016, I have a lot of other topics to work on (especially the Domogik home automation project) and I have nearly to time for this project.
@@ -11,7 +11,7 @@ I would like to say THANK YOU to the people who are currently helping the others
 
 Thanks again to all of you, users and contributors !
 
-If one of the regular contributor wish to got some administrator permissions to this repository, please, just create an issue and I will be happy to give you the access.
+If one of the regular contributor wish to obtain administrator permissions to this repository, please create an issue and I will be happy to give you the access.
 
 -- Fritz
 
@@ -25,11 +25,11 @@ This project is a collection of scripts and binaries file to hack your Xiaomi Yi
 This camera has the default following features :
 * wifi
 * night vision
-* motion detection : a video file is generated if a motion have been detected in the last 60 seconds.
-* send video data over the network on Chinese servers in the cloud to allow people to view camera data from their smartphone wherever they are.
-* setup thanks to a smartphone application.
+* motion detection : a video file is generated if a motion have been detected in the last 60 seconds
+* send video data over the network on Chinese servers in the cloud to allow people to view camera data from their smartphone wherever they are
+* setup thanks to a smartphone application
 * local video storage on a SD card
-* no RTSP server in the last firmwares
+* no RTSP server in the last firmware
 
 This hack includes :
 * ntpclient (set date and time over internet)
@@ -85,8 +85,8 @@ Start the camera
 * Plug the Yi camera
 
 The camera will start. The led will indicate the current status :
-* yellow : camera startup
-* blue blinking : network configuration in progress (connec to wifi, set up the IP address)
+* yellow : camera start-up
+* blue blinking : network configuration in progress (connect to wifi, set up the IP address)
 * blue : network configuration is OK. Camera is ready to use.
 
 You can test is your camera is up and running this hack with your browser on url **http://ip/**. You should see this page :
@@ -163,7 +163,7 @@ There is no login/password required.
 I want more !
 =============
 
-Some scripts are provided in the **sd/test/scripts** folder. Please read the **README.md** file in this folder for more informations.
+Some scripts are provided in the **sd/test/scripts** folder. Please read the **README.md** file in this folder for more information.
 
 Uninstall the hack
 ==================
